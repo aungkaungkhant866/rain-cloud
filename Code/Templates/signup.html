@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <div>
+        <div class="tab-content">
+            <div id="signup" class="container tab-pane active"><br>
+                <h3>Sign Up Your Rain-Account</h3>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <br>
+                    {{signup.as_p}}
+                    <button type="submit" class="btn btn-outline-secondary">Sign Up</button><br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

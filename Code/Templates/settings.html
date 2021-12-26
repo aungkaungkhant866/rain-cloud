@@ -1,0 +1,56 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <h3>Courses</h3>
+
+        <div>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete">
+                <i class="fa fa-trash-o"></i>
+                Delete Course
+            </button>
+        </div>
+
+        <div class="modal" id="delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Course</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+                        {% if data %}
+                        <form action="delete_course" method="POST">
+                            {% csrf_token %}
+                                <select class="form-control" name="title">
+                                    {% for i in data %}
+                                        {% if i.Username == request.user.username %}
+                                            <option value="{{i.Name}}">{{i.Name}}</option>
+                                        {% elif request.user.username == "codejapoe" %}
+                                            <option value="{{i.Name}}">{{i.Name}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select><br>
+                                <div align="center">
+                                    <input type="submit" value="Delete Course" class="btn btn-outline-danger">
+                                </div>
+                        </form>
+                        {% endif %}
+                    </div>
+
+                    <div class="modal-footer">
+                        <p style="color: hsl(0, 100%, 71%);">Deleting courses cannot be undone.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div><hr width="95%">
+
+    <div class="container">
+        <h3>Sign Out Your Rain-Account</h3>
+        <a href="{% url 'Sign Out' %}" class="btn btn-outline-warning"><i class="fa fa-sign-out"></i>&nbsp;Sign Out</a>
+    </div>
+{% endblock %}

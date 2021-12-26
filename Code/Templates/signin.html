@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <div>
+        <div class="tab-content">
+            <div id="signin" class="container tab-pane active"><br>
+                <h3>Sign In Your Rain-Account</h3>
+
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <br>
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Username"><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password"><br>
+                    <button type="submit" class="btn btn-outline-secondary">Sign In</button><br><br>
+                    <b style="color: hsl(0, 100%, 71%);">{{error}}</b><br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

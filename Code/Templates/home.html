@@ -1,0 +1,20 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block content %}
+    {% if success %}
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{success}}</strong>
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <h1>Profile</h1>
+        {% if request.user.username == "codejapoe" %}
+            <h3>Username: {{request.user.username}}&nbsp;<i class="fa fa-check-circle" style="color: lightblue;"></i></h3>
+        {% else %}
+            <h3>Username: {{request.user.username}}</h3>
+        {% endif %}
+        <p>Email Address: {{request.user.email}}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <title>Rain-Cloud</title>
+    <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/popper.min.js' %}"></script>
+    <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="{% static '/img/rain-cloud.png' %}" type="image/x-icon">
+    <style>
+        .errorlist{
+            color: rgb(255, 77, 77);
+        }
+        form{
+            background-color: #E7E9EB;
+            border-radius: 5px;
+            padding: 0.01em 16px;
+            margin: 20px 0;
+        }
+        input{
+            border-radius: 5px;
+            width: 100%;
+        }
+        br{
+            margin-top: 0.5cm;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+        <a class="navbar-brand" href="{% url 'Accounts Center' %}">Rain-Cloud&nbsp;<i class='bx bx-cloud-light-rain' ></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item" style="display: block;">
+                    <a class="nav-link active" href="{% url 'Accounts Center' %}"><i class="fa fa-users"></i>&nbsp;Accounts Center</a>
+                </li>
+                <li class="nav-item" style="display: block;">
+                    <a class="nav-link active" href="{% url 'Sign In' %}"><i class="fa fa-sign-in"></i>&nbsp;Sign In</a>
+                </li>
+                <li class="nav-item" style="display: block;">
+                    <a class="nav-link active" href="{% url 'Sign Up' %}"><i class="fa fa-user-plus"></i>&nbsp;Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block content %}
+        data
+    {% endblock %}
+    <br><br><hr>
+</body>
+</html>

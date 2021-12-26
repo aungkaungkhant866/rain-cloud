@@ -1,0 +1,27 @@
+{% extends 'navbar.html' %}
+{% load static %}
+    
+{% block content %}
+    <div class="container">
+        <h3>Upload Videos</h3>
+        <form action="upload" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="course">Select course:</label>
+            <select class="form-control" id="course" name="courses">
+                {% for i in data %}
+                    {% if i.Username == request.user.username %}
+                        <option>{{i.Name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select><br>
+            <input type="text" name="title" class="form-control" placeholder="Title (Optional)" maxlength="80">
+            <b>Note: Title has the limit of 80 characters.</b><br><br>
+            <textarea class="form-control" rows="5" name="description" placeholder="Description (Optional)"></textarea><br>
+            <input type="file" id="chooser" accept="video/*" name="video">
+            <label for="chooser" class="btn btn-secondary form-control"><i class="fa fa-file-video-o"></i>&nbsp;Choose a video</label><br>
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fa fa-cloud-upload"></i>&nbsp;Upload Video
+            </button>
+        </form>
+    </div><hr>
+{% endblock %}

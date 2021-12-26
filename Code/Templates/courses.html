@@ -1,0 +1,119 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+    <div align="center">
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{error}}</strong>
+        </div>
+        {% endif %}
+        <button type="button" class="btn btn-outline-primary btn-block btn-lg" data-toggle="modal" data-target="#upload"><i class="fa fa-plus-circle"></i>&nbsp;Create New Course</button><br>
+    </div>
+
+    <div class="modal fade" id="upload">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Course</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body container">
+                    <form action="create" method="POST">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" name="name" placeholder="Course Name"><br>
+                        <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea><br>
+                        <div align="center">
+                            <button type="submit" class="btn btn-outline-primary">Submit and create</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <p>By creating the course, you are accepting our terms & conditions.</p>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h1 align="center">My Courses</h1>
+        {% if warning %}
+        <div class="alert alert-warning alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{warning}}</strong>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>If there is None, try refreshing it.</strong>
+        </div>
+        {% endif %}
+            {% for i in data %}
+                {% if i.Username == request.user.username %}
+                    <a>
+                        <div class="container" align="center">
+                            <div class="card" style="width:300px">
+                                <div class="card-body">
+                                    <h4 class="card-title" name="title">{{i.Name}}</h4>
+                                    <p class="card-text">{{i.Description}}</p>
+                                    <button type="button" class="btn btn-outline-primary" style="border-radius: 50%;" data-toggle="modal" data-target="#{{i.Name}}">
+                                        <i class="fa fa-external-link"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div><br>
+                    </a>
+
+                    <div class="modal" id="{{i.Name}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h4 class="modal-title">{{i.Name}}</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <div class="modal-body" style="word-break: break-all;">
+                                    <p align="center">{{i.Description}}</p>
+                                    {% for j in i.videos %}
+                                        {% if j == "none" %}
+                                            <h3 align="center">No interesting things here.</h3>
+                                        {% else %}
+                                            {% if "Description: " in j %}
+                                                <div>
+                                                    <p>{{j}}</p>
+                                                </div>
+                                            {% elif "https://firebasestorage.googleapis.com/v0/b/rain-cloud-2021.appspot.com/o/Courses%2F" in j %}
+                                                <div class="container">
+                                                    <div class="embed-responsive embed-responsive-16by9">
+                                                        <video class="embed-responsive-item" src="{{j}}" controls></video>
+                                                    </div>
+                                                </div><br>
+                                                <div align="center">
+                                                    <a href="{{j}}" target="_blank" class="btn btn-outline-dark" style="border-radius: 50%;"><i class="fa fa-link"></i></a>
+                                                </div><hr>
+                                            {% else %}
+                                                <h3>{{j}}</h3>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

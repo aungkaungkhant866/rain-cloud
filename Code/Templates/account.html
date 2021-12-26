@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <div>
+        <div class="tab-content">
+            <div id="home" class="container tab-pane active"><br>
+                <h3>Accounts Center</h3>
+                <p>Welcome to Self-Study E-Learning Cloud Platform. Sign in your account or Sign Up to create one!</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M18 7c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-3.333L22 17V7l-4 3.333V7zm-1.998 10H4V7h12l.001 4.999L16 12l.001.001.001 4.999z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 3H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h7v3H8v2h8v-2h-3v-3h7c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 15V5h16l.001 10H4z"></path><path d="m10 13 5-3-5-3z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 3H7c-1.103 0-2 .897-2 2v2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h6c1.103 0 2-.897 2-2h8c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM9.997 19H4V9h6l-.003 10zm10-2H12V9c0-1.103-.897-2-2-2H7V5h13l-.003 12z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 3H4c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h7v2H8v2h8v-2h-3v-2h7c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 14V5h16l.002 9H4z"></path></svg>
+                <br>
+                {% if request.user.is_authenticated %}
+                    <b>Successfully Logged In!</b><br>
+                    <a href="/"><button class="btn">Continue To 'Home' Page</button></a>
+                {% else %}
+                    <b>Explore, Upload, Learn In Anywhere On Any Devices.</b><br>
+                    <h6 style="color: hsl(0, 100%, 71%);">{{alert}}</h6>
+                {% endif %}
+            </div><br>
+            <div class="container">
+                <button type="button" class="btn btn-outline-light text-dark" data-toggle="collapse" data-target="#terms">Terms & Conditions</button>
+                <div id="terms" class="collapse">
+                    <ul>
+                        <li>Your privacy is protected by Code Ja Poe Corporation.</li>
+                        <li>Free unlimited storage access.</li>
+                        <li>Life-time access.</li>
+                        <li>Your data is kept with your account.</li>
+                        <li>Don't need to back up.</li>
+                        Database Provided by Google. © 2021 Code Ja Poe Corporation, Myanmar.
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
